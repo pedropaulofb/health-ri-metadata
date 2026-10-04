@@ -1,0 +1,94 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix hri: <https://w3id.org/health-ri/metadata-vocabulary#> .
+@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix sct: <http://snomed.info/id/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://w3id.org/health-ri/metadata-vocabulary> a owl:Ontology ;
+    vann:example <https://w3id.org/health-ri/metadata-vocabulary/example/health-condition-of-interest>,
+        <https://w3id.org/health-ri/metadata-vocabulary/example/anatomical-location-covered> ;
+    sh:suggestedShapesGraph <https://w3id.org/health-ri/metadata-vocabulary/shacl> ;
+    dcterms:title "Health-RI Metadata Vocabulary"@en ;
+    rdfs:label "Health-RI Metadata Vocabulary"@en ;
+    dcterms:abstract "An RDF vocabulary defining terms for describing and discovering health datasets. It is intended for use in the Health-RI Metadata Schema alongside terms reused from established metadata standards and external vocabularies."@en ;
+    dcterms:identifier "https://w3id.org/health-ri/metadata-vocabulary"^^xsd:anyURI ;
+    dcat:landingPage <https://w3id.org/health-ri/metadata-vocabulary/spec> ;
+    foaf:logo <https://raw.githubusercontent.com/Health-RI/semantic-interoperability/refs/heads/main/docs/assets/images/health-ri-logo-blue.png> ;
+    mod:repository <https://w3id.org/health-ri/metadata-vocabulary/git> ;
+    owl:imports <http://www.w3.org/2004/02/skos/core> ;
+    dcterms:description "The Health-RI Metadata Vocabulary defines reusable terms for expressing aspects of health dataset metadata. Each term has a persistent identifier and a documented meaning, supported by RDF/OWL definitions. Usage examples and accompanying SHACL shapes help implementers apply and validate the terms in metadata records. The terms are intended for use, alongside externally defined terms, in the Health-RI Metadata Schema."@en ;
+    dcterms:creator <https://orcid.org/0009-0002-3089-9558>,
+        <https://orcid.org/0000-0001-8306-0380>,
+        <https://orcid.org/0000-0003-0771-3516>,
+        <https://orcid.org/0000-0003-2736-7817> ;
+    dcterms:publisher <https://w3id.org/health-ri> ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:language "en"^^xsd:language ;
+    dcterms:issued "2026-09-30"^^xsd:date ;
+    dcterms:modified "2026-10-03"^^xsd:date ;
+    owl:priorVersion <https://w3id.org/health-ri/metadata-vocabulary/v0.4.0> ;
+    owl:versionInfo "0.4.1" ;
+    dcat:version "0.4.1" ;
+    owl:versionIRI <https://w3id.org/health-ri/metadata-vocabulary/v0.4.1> ;
+    vann:preferredNamespacePrefix "hri" ;
+    vann:preferredNamespaceUri "https://w3id.org/health-ri/metadata-vocabulary#"^^xsd:anyURI ;
+    foaf:homepage <https://w3id.org/health-ri/metadata-vocabulary/spec> ;
+    rdfs:seeAlso <https://w3id.org/health-ri/metadata-vocabulary/v0.4.1/spec> ;
+    schema:codeRepository <https://w3id.org/health-ri/metadata-vocabulary/git> ;
+    dcat:keyword "health dataset metadata"@en, "dataset discovery"@en, "data catalogues"@en, "health condition of interest"@en, "anatomical coverage"@en ;
+    dcterms:bibliographicCitation "Barcelos, P. P. F.; Neikes, H.; Konrad, A.; van Ulzen, N. (2026). Health-RI Metadata Vocabulary, version 0.4.1. https://w3id.org/health-ri/metadata-vocabulary/v0.4.1"@en ;
+    rdfs:comment "For each release, the versioned vocabulary Turtle file is the sole normative specification of the Health-RI Metadata Vocabulary. The accompanying examples, SHACL shapes, and generated HTML documentation are non-normative supporting resources. They illustrate usage and provide suggested validation checks; they do not introduce or override vocabulary requirements. In case of discrepancy, the versioned vocabulary Turtle file takes precedence. Development release for review. The entire vocabulary is versioned together using Semantic Versioning; term IRIs remain unversioned. This release does not assert approval or adoption by a particular Health-RI Metadata Schema release."@en .
+
+hri:healthConditionOfInterest a owl:ObjectProperty ;
+    rdfs:label "health condition of interest"@en ;
+    skos:definition "Relates a dataset to a SNOMED CT or ICD-10 concept representing a disease, disorder, or other clinical condition that the dataset concerns as a whole."@en ;
+    rdfs:comment "Values must be IRIs identifying SNOMED CT or ICD-10 concepts and are modelled as skos:Concept in the metadata graph, following the Health-RI Metadata Schema convention. The accompanying non-normative SHACL shape checks IRI-valued objects, skos:Concept typing, and conformity to the SNOMED CT or WHO ICD-10 identifier format. These checks do not verify that the identified concept exists, is active, or represents an appropriate clinical condition. The range declaration does not verify terminology membership."@en ;
+    skos:scopeNote "Use this property to describe health conditions of interest in dataset-level metadata and catalogue records. Multiple values may be provided. Select only SNOMED CT or ICD-10 concepts that represent diseases, disorders, or other clinical conditions. The relation does not assert that any individual participant has been diagnosed with a condition and is not intended to enumerate diagnoses in individual records."@en ;
+    skos:example "A dataset concerning myocardial infarction may use this property with http://snomed.info/id/22298006 (SNOMED CT: Myocardial infarction) as its value. In the metadata graph, the linked resource is typed as skos:Concept. The relation describes the dataset's subject matter without asserting a diagnosis for any individual participant."@en ;
+    rdfs:domain dcat:Dataset ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://w3id.org/health-ri/metadata-vocabulary> .
+
+hri:anatomicalLocationCovered a owl:ObjectProperty ;
+    rdfs:label "anatomical location covered"@en ;
+    skos:definition "Relates a dataset to an anatomical class that is Anatomical structure (SNOMED CT 91723000) or one of its subclasses, describing anatomical coverage of the dataset as a whole at metadata or catalogue level."@en ;
+    rdfs:comment "The anonymous range is an owl:hasValue restriction on rdfs:subClassOf with value http://snomed.info/id/91723000. Under OWL Full / RDF-Based Semantics, every linked value is therefore a subclass of that root. Subclass transitivity and reflexivity include indirect subclasses and the root itself. This metamodeling pattern is outside OWL 2 DL. It entails subclass membership; it does not validate whether SNOMED CT already establishes that membership, require a SNOMED-owned IRI, or verify concept status. Use SNOMED CT anatomical class IRIs for the intended terminology binding. No skos:Concept typing is required for these values."@en ;
+    skos:scopeNote "Describes aggregate anatomical coverage of the dataset. Multiple values may be supplied; use is optional (0..*). Values identify anatomical classes, not individual organs, patients, samples, or observations. For a dataset combining data categories or modalities, this property does not pair a particular anatomical location with a particular category, modality, or record. When used, the accompanying non-normative SHACL shape requires Dataset subjects and SNOMED CT IRIs with a supplied rdfs:subClassOf path to Anatomical structure, including the root itself. When using this shape, validate against a separately trusted SNOMED hierarchy without applying the vocabulary's range inference; the OWL Full range axiom alone does not establish terminology membership."@en ;
+    skos:example "A dataset covering the lung may link directly to http://snomed.info/id/39607008 (Lung structure), an anatomical class subsumed by http://snomed.info/id/91723000. The range axiom also entails that subclass relationship."@en ;
+    rdfs:domain dcat:Dataset ;
+    rdfs:range [
+        a owl:Restriction ;
+        owl:onProperty rdfs:subClassOf ;
+        owl:hasValue sct:91723000
+    ] ;
+    rdfs:seeAlso sct:91723000,
+        <https://www.w3.org/TR/owl2-rdf-based-semantics/> ;
+    rdfs:isDefinedBy <https://w3id.org/health-ri/metadata-vocabulary> .
+
+<https://w3id.org/health-ri> a foaf:Organization ;
+    foaf:name "Health-RI" ;
+    foaf:homepage <https://www.health-ri.nl/> .
+
+<https://orcid.org/0009-0002-3089-9558> a foaf:Person ;
+    foaf:name "Ana Konrad" ;
+    foaf:mbox <mailto:ana.konrad@health-ri.nl> .
+
+<https://orcid.org/0000-0001-8306-0380> a foaf:Person ;
+    foaf:name "Hannah Neikes" ;
+    foaf:mbox <mailto:hannah.neikes@health-ri.nl> .
+
+<https://orcid.org/0000-0003-0771-3516> a foaf:Person ;
+    foaf:name "Niek van Ulzen" ;
+    foaf:mbox <mailto:niek.vanulzen@health-ri.nl> .
+
+<https://orcid.org/0000-0003-2736-7817> a foaf:Person ;
+    foaf:name "Pedro Paulo F. Barcelos" ;
+    foaf:mbox <mailto:pedro.barcelos@health-ri.nl> .

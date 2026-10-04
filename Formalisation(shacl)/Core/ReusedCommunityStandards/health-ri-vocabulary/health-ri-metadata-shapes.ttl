@@ -1,0 +1,93 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sct: <http://snomed.info/id/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix mod: <https://w3id.org/mod#> .
+@prefix hri: <https://w3id.org/health-ri/metadata-vocabulary#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+# Non-normative validation shapes metadata.
+# The versioned vocabulary Turtle file is the sole normative specification.
+# These shapes provide suggested checks and do not introduce or override vocabulary requirements.
+<https://w3id.org/health-ri/metadata-vocabulary/shacl> a owl:Ontology ;
+    dcterms:title "Health-RI Metadata Vocabulary — application validation shapes"@en ;
+    dcterms:description "Non-normative SHACL shapes provided as implementation guidance for data using the Health-RI Metadata Vocabulary. The versioned vocabulary Turtle file is the sole normative specification and takes precedence in case of discrepancy. These shapes do not introduce or override vocabulary requirements. Checks Dataset subject typing, IRI-valued objects, skos:Concept typing, and SNOMED CT or WHO ICD-10 identifier patterns for health-condition values. These pattern checks do not verify concept existence. Checks anatomical values against SNOMED CT IRI syntax and supplied subclass paths to Anatomical structure. Hierarchy evidence must come from a trusted SNOMED CT release. Does not establish clinical appropriateness or concept activity status, and is not the complete Health-RI Metadata Schema."@en ;
+    dcterms:identifier "https://w3id.org/health-ri/metadata-vocabulary/shacl"^^xsd:anyURI ;
+    dcterms:creator <https://orcid.org/0009-0002-3089-9558>,
+        <https://orcid.org/0000-0001-8306-0380>,
+        <https://orcid.org/0000-0003-0771-3516>,
+        <https://orcid.org/0000-0003-2736-7817> ;
+    dcterms:publisher <https://w3id.org/health-ri> ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:language "en"^^xsd:language ;
+    dcterms:format "text/turtle" ;
+    dcterms:modified "2026-10-03"^^xsd:date ;
+    dcterms:references <https://w3id.org/health-ri/metadata-vocabulary/v0.4.1> ;
+    foaf:primaryTopic <https://w3id.org/health-ri/metadata-vocabulary> ;
+    mod:repository <https://w3id.org/health-ri/metadata-vocabulary/git> .
+
+<https://w3id.org/health-ri> a foaf:Organization ;
+    foaf:name "Health-RI" ;
+    foaf:homepage <https://www.health-ri.nl/> .
+
+# Vocabulary whose data can be checked with these suggested shapes.
+<https://w3id.org/health-ri/metadata-vocabulary> sh:suggestedShapesGraph <https://w3id.org/health-ri/metadata-vocabulary/shacl> .
+
+# Application validation, separate from vocabulary entailments.
+# Blank-node shapes avoid introducing extra Health-RI vocabulary terms.
+# Health-condition patterns check identifier syntax only, not terminology membership,
+# concept activity, or clinical suitability. No terminology downloads are required.
+# WHO ICD-10 identifiers may include a release year; ICD-11 is not accepted.
+[] a sh:NodeShape ;
+    sh:targetSubjectsOf hri:healthConditionOfInterest ;
+    sh:class dcat:Dataset ;
+    sh:property [
+        sh:path hri:healthConditionOfInterest ;
+        sh:nodeKind sh:IRI ;
+        sh:class skos:Concept ;
+        sh:or (
+            [ sh:pattern "^http://snomed[.]info/id/[0-9]+$" ]
+            [ sh:pattern "^http://id[.]who[.]int/icd/release/10/([0-9]{4}/)?[A-Za-z0-9][A-Za-z0-9.-]*$" ]
+        ) ;
+        sh:message "Health condition of interest must be an IRI identified as a skos:Concept and use the SNOMED CT or WHO ICD-10 identifier format."@en
+    ] .
+
+# No minCount or maxCount: optional and repeatable (0..*).
+# Validate without loading the vocabulary's domain/range axioms if missing
+# explicit data typing must be detected rather than supplied by inference.
+
+# Anatomical subclass semantics are expressed in the vocabulary (OWL Full).
+# Supply trusted SNOMED subclass evidence before validation, without vocabulary inference.
+# scripts/validate.py excludes subclass assertions from submitted metadata.
+[] a sh:NodeShape ;
+    sh:targetSubjectsOf hri:anatomicalLocationCovered ;
+    sh:class dcat:Dataset ;
+    sh:property [
+        sh:path hri:anatomicalLocationCovered ;
+        sh:nodeKind sh:IRI ;
+        sh:pattern "^http://snomed[.]info/id/[0-9]+$" ;
+        sh:node [
+            sh:property [
+                sh:path [ sh:zeroOrMorePath rdfs:subClassOf ] ;
+                sh:hasValue sct:91723000 ;
+                sh:message "Anatomical value must be Anatomical structure (91723000) or have a trusted subclass path to it."@en
+            ]
+        ] ;
+        sh:message "Anatomical location covered must be a SNOMED CT IRI in the Anatomical structure hierarchy."@en
+    ] .
+
+<https://orcid.org/0009-0002-3089-9558> a foaf:Person ;
+    foaf:name "Ana Konrad" .
+
+<https://orcid.org/0000-0001-8306-0380> a foaf:Person ;
+    foaf:name "Hannah Neikes" .
+
+<https://orcid.org/0000-0003-0771-3516> a foaf:Person ;
+    foaf:name "Niek van Ulzen" .
+
+<https://orcid.org/0000-0003-2736-7817> a foaf:Person ;
+    foaf:name "Pedro Paulo F. Barcelos" .

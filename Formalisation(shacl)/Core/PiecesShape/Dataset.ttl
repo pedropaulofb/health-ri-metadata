@@ -441,3 +441,42 @@ _:63db696725d34edebb948ae5f263a6628 rdf:first eu:NON_PUBLIC;
   sh:nodeKind sh:IRI;
   dash:viewer dash:URIViewer;
   dash:editor dash:URIEditor .
+
+# BEGIN generated optional release properties
+# Source: Documents/next-release-properties.json
+# Descriptive registrations only; optional vocabulary checks are separate.
+<http://data.health-ri.nl/core/p2/DatasetShape> sh:property <http://data.health-ri.nl/core/p2/DatasetShape#alternative> .
+<http://data.health-ri.nl/core/p2/DatasetShape#alternative> a sh:PropertyShape ;
+    sh:path <http://purl.org/dc/terms/alternative> ;
+    sh:name "alternative"@en ;
+    sh:description "An alternative name for the dataset. This property contains an alternative name for the Dataset. This property can be repeated for parallel language versions of the alternative name."@en ;
+    rdfs:seeAlso <https://github.com/Health-RI/metadata-documentation/commit/7e8ac690dd903c74e170265b3f5ab323434aaf8e> .
+
+<http://data.health-ri.nl/core/p2/DatasetShape> sh:property <http://data.health-ri.nl/core/p2/DatasetShape#anatomical-location-covered> .
+<http://data.health-ri.nl/core/p2/DatasetShape#anatomical-location-covered> a sh:PropertyShape ;
+    sh:path <https://w3id.org/health-ri/metadata-vocabulary#anatomicalLocationCovered> ;
+    sh:name "anatomical location covered"@en ;
+    sh:description "Relates a dataset to an anatomical class that is Anatomical structure (SNOMED CT 91723000) or one of its subclasses, describing anatomical coverage of the dataset as a whole at metadata or catalogue level. Use a SNOMED CT anatomical class: Anatomical structure (91723000) or a direct or indirect subclass. No skos:Concept typing is required. This describes dataset-level coverage and does not associate a location with a particular modality, data category, sample, or record. The OWL Full range entails subclass membership; it does not validate SNOMED classification. Use separately trusted hierarchy evidence for the opt-in validation checks."@en ;
+    rdfs:seeAlso <https://w3id.org/health-ri/metadata-vocabulary/v0.4.1> .
+
+<http://data.health-ri.nl/core/p2/DatasetShape> sh:property <http://data.health-ri.nl/core/p2/DatasetShape#health-condition-of-interest> .
+<http://data.health-ri.nl/core/p2/DatasetShape#health-condition-of-interest> a sh:PropertyShape ;
+    sh:path <https://w3id.org/health-ri/metadata-vocabulary#healthConditionOfInterest> ;
+    sh:name "health condition of interest"@en ;
+    sh:description "Relates a dataset to a SNOMED CT or ICD-10 concept representing a disease, disorder, or other clinical condition that the dataset concerns as a whole. Use a SNOMED CT or ICD-10 concept for a disease, disorder, or other clinical condition concerning the dataset as a whole. Type the value as skos:Concept. This does not assert a diagnosis for any participant. Identifier-format checks do not establish concept existence, activity, or clinical suitability."@en ;
+    rdfs:seeAlso <https://w3id.org/health-ri/metadata-vocabulary/v0.4.1> .
+
+<http://data.health-ri.nl/core/p2/DatasetShape> sh:property <http://data.health-ri.nl/core/p2/DatasetShape#landing-page> .
+<http://data.health-ri.nl/core/p2/DatasetShape#landing-page> a sh:PropertyShape ;
+    sh:path <http://www.w3.org/ns/dcat#landingPage> ;
+    sh:name "landing page"@en ;
+    sh:description "A web page that provides access to the Dataset, its Distributions and/or additional information. It is intended to point to a landing page at the original data provider, not to a page on a site of a third party, such as an aggregator."@en ;
+    rdfs:seeAlso <https://github.com/Health-RI/metadata-documentation/commit/7e8ac690dd903c74e170265b3f5ab323434aaf8e> .
+
+<http://data.health-ri.nl/core/p2/DatasetShape> sh:property <http://data.health-ri.nl/core/p2/DatasetShape#provenance> .
+<http://data.health-ri.nl/core/p2/DatasetShape#provenance> a sh:PropertyShape ;
+    sh:path <http://purl.org/dc/terms/provenance> ;
+    sh:name "provenance"@en ;
+    sh:description "A statement about the lineage of a Dataset. Information about how the data was collected, including methodologies, tools, and protocols used, this property can be repeated for different versions of the provenance (e.g. the provenance in different languages)."@en ;
+    rdfs:seeAlso <https://github.com/Health-RI/metadata-documentation/commit/7e8ac690dd903c74e170265b3f5ab323434aaf8e> .
+# END generated optional release properties

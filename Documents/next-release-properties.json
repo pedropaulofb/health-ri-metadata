@@ -1,0 +1,61 @@
+{
+  "status": "Unreleased minor-release candidate",
+  "vocabulary_version": "0.4.1",
+  "vocabulary_repository": "pedropaulofb/health-ri-metadata-vocabulary",
+  "vocabulary_commit": "0a06931f250954443edd62d930547bf02bd77711",
+  "vocabulary_path": "vocabulary/versioned/health-ri-metadata-vocabulary-v0.4.1.ttl",
+  "domain": "http://www.w3.org/ns/dcat#Dataset",
+  "validation_policy": "Existing core constraints are unchanged. New property registrations are descriptive. Vocabulary checks are explicit opt-in checks, not core conformance requirements.",
+  "properties": [
+    {
+      "label": "alternative",
+      "iri": "http://purl.org/dc/terms/alternative",
+      "curie": "dct:alternative",
+      "definition": "An alternative name for the dataset.",
+      "range": "rdfs:Literal",
+      "cardinality": "0..n",
+      "usage": "This property contains an alternative name for the Dataset. This property can be repeated for parallel language versions of the alternative name.",
+      "source": "https://github.com/Health-RI/metadata-documentation/commit/7e8ac690dd903c74e170265b3f5ab323434aaf8e"
+    },
+    {
+      "label": "anatomical location covered",
+      "iri": "https://w3id.org/health-ri/metadata-vocabulary#anatomicalLocationCovered",
+      "curie": "hri:anatomicalLocationCovered",
+      "definition": "Relates a dataset to an anatomical class that is Anatomical structure (SNOMED CT 91723000) or one of its subclasses, describing anatomical coverage of the dataset as a whole at metadata or catalogue level.",
+      "range": "Anatomical class (IRI)",
+      "cardinality": "0..n",
+      "usage": "Use a SNOMED CT anatomical class: Anatomical structure (91723000) or a direct or indirect subclass. No skos:Concept typing is required. This describes dataset-level coverage and does not associate a location with a particular modality, data category, sample, or record. The OWL Full range entails subclass membership; it does not validate SNOMED classification. Use separately trusted hierarchy evidence for the opt-in validation checks.",
+      "source": "https://w3id.org/health-ri/metadata-vocabulary/v0.4.1"
+    },
+    {
+      "label": "health condition of interest",
+      "iri": "https://w3id.org/health-ri/metadata-vocabulary#healthConditionOfInterest",
+      "curie": "hri:healthConditionOfInterest",
+      "definition": "Relates a dataset to a SNOMED CT or ICD-10 concept representing a disease, disorder, or other clinical condition that the dataset concerns as a whole.",
+      "range": "skos:Concept (IRI)",
+      "cardinality": "0..n",
+      "usage": "Use a SNOMED CT or ICD-10 concept for a disease, disorder, or other clinical condition concerning the dataset as a whole. Type the value as skos:Concept. This does not assert a diagnosis for any participant. Identifier-format checks do not establish concept existence, activity, or clinical suitability.",
+      "source": "https://w3id.org/health-ri/metadata-vocabulary/v0.4.1"
+    },
+    {
+      "label": "landing page",
+      "iri": "http://www.w3.org/ns/dcat#landingPage",
+      "curie": "dcat:landingPage",
+      "definition": "A web page that provides access to the Dataset, its Distributions and/or additional information.",
+      "range": "foaf:Document (IRI)",
+      "cardinality": "0..n",
+      "usage": "It is intended to point to a landing page at the original data provider, not to a page on a site of a third party, such as an aggregator.",
+      "source": "https://github.com/Health-RI/metadata-documentation/commit/7e8ac690dd903c74e170265b3f5ab323434aaf8e"
+    },
+    {
+      "label": "provenance",
+      "iri": "http://purl.org/dc/terms/provenance",
+      "curie": "dct:provenance",
+      "definition": "A statement about the lineage of a Dataset.",
+      "range": "dct:ProvenanceStatement",
+      "cardinality": "0..n",
+      "usage": "Information about how the data was collected, including methodologies, tools, and protocols used, this property can be repeated for different versions of the provenance (e.g. the provenance in different languages).",
+      "source": "https://github.com/Health-RI/metadata-documentation/commit/7e8ac690dd903c74e170265b3f5ab323434aaf8e"
+    }
+  ]
+}
