@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Correct citation metadata to the released v2.0.3 baseline (22 June 2026); the forthcoming release version/date remain unassigned.
 - Add descriptive registrations for two optional Health-RI vocabulary v0.4.1 properties: health condition of interest and anatomical location covered.
 - Register the optional alternative title, landing page and provenance properties already drafted in documentation `v2.1`.
 - Add a structured property addendum, complete dataset example, pinned vocabulary reference, opt-in validator and compatibility regressions. Existing core constraints are unchanged.
@@ -127,4 +128,3 @@ In the tables below, you can find an overview of the number of mandatory and rec
 - `licence` (now belongs to the Distribution class)
 
 ---
-

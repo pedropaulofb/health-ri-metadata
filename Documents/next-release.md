@@ -85,7 +85,8 @@ documentation `v2.1` branch and are preserved in the structured addendum.
 - Resolve the existing schema/documentation cardinality discrepancies before making
   a blanket profile-conformance claim (notably Distribution title, issue #255, and Catalog dataset membership).
 - Confirm the final schema version, date, vocabulary adoption and validation policy.
-- Review `CITATION.cff` at release time; its current version/date describe v2.0.0.
+- Update `CITATION.cff` at release time; its current version/date describe the
+  released v2.0.3 baseline, not the unpublished candidate.
 - Merge schema through `develop` to `master` and publish the corresponding tag/release.
 - Merge the reviewed documentation candidate to `main` in coordination with that
   release. This triggers the existing Pages publication model. Record both commit
