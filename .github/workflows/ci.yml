@@ -1,21 +1,28 @@
 name: Automated SHACL validation testing
 on:
-  # Only run the SHACL testing if SHACLs or testing has actually changed
   pull_request:
-    paths:
-      - 'Formalisation(shacl)/**'
-      - 'tests/**'
+  push:
+    branches: [develop, master]
+    tags: ['v*']
+  workflow_dispatch:
+permissions:
+  contents: read
 jobs:
   ci:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: 'pip' # caching pip dependencies
+          cache-dependency-path: pyproject.toml
       - name: Install Hatch
         run: pipx install hatch
         
       - name: Run tests
         run: hatch run pytest
+      - name: Check generated property registrations
+        run: python scripts/sync_release_properties.py --check

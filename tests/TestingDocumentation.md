@@ -9,8 +9,8 @@ the shapes against test data of which we know the expected test result.
 
 ## Running the tests
 
-The tests are automatically run by GitHub Actions when a pull request changes files under
-`Formalisation(shacl)/**` or `tests/**`. However, you can also run these locally. You will need to
+The tests are automatically run by GitHub Actions for every pull request, pushes to
+`develop` and `master`, version tags, and manual dispatch. However, you can also run these locally. You will need to
 have [Hatch](https://hatch.pypa.io/latest/) installed on your computer. To install Hatch, follow
 the instructions at this link for your operating system: <https://hatch.pypa.io/latest/install/>
 
@@ -26,3 +26,7 @@ error message was.
 
 The testing is performed using [pySHACL](https://github.com/RDFLib/pySHACL) and [pytest](https://docs.pytest.org/).
 Full documentation on these tools is currently outside of the scope of this document.
+
+The release-property tests check generated registrations, optional vocabulary validation,
+trusted hierarchy handling, examples and preservation of core acceptance. See
+[the release draft](../Documents/next-release.md) for the separate opt-in validator.

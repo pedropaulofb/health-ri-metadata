@@ -12,6 +12,10 @@
 # Health-RI core metadata schema 
 This repo holds the **Health-RI Core metadata schema**, which is used in the [National Health Data Catalogue](https://catalogus.healthdata.nl/).
 
+## Forthcoming release
+
+The `develop` branch prepares the next release. See the [release draft](Documents/next-release.md) and [structured property addendum](Documents/next-release-properties.json) for optional additions, vocabulary v0.4.1, validation and compatibility. The links below describe the released model.
+
 ## Technical specifications
 To view specifics of the metadata model per class and property, please visit the **[documentation page](https://health-ri.github.io/metadata-documentation/)**.
 <br>**SHACL shapes** corresponding to the latest version of the model can be found in the [Shapes](https://github.com/Health-RI/health-ri-metadata/tree/master/Formalisation(shacl)/Core) folder in this repository.
